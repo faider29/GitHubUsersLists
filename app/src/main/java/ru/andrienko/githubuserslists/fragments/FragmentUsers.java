@@ -43,6 +43,10 @@ public class FragmentUsers  extends Fragment {
     private UsersAdapter mAdapter;
     private List<User> mUserList = new ArrayList<>();
     private NavController mNavController;
+    private FragmentUsers mFragmentUsers;
+    public static final String USER_KEY = "user_key";
+
+
 
     private NetworkRepository mNetworkRepository = new NetworkRepository();
 
@@ -57,6 +61,17 @@ public class FragmentUsers  extends Fragment {
         mRecyclerView = view.findViewById(R.id.rv_users);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListeners((position, user) -> {
+//            mNavController = Navigation.findNavController(,R.id.nav_host_fragment);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(USER_KEY,user);
+//            mFragmentUsers.setArguments(bundle);
+
+            mNavController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+            Log.d(TAG, "onCreateView: " + bundle.size());
+            mNavController.navigate(R.id.fragmentReadUsers,bundle);
+        });
 
         initCallback();
 
@@ -77,17 +92,9 @@ public class FragmentUsers  extends Fragment {
 
             @Override
             public void onFailure(Call<JsonArray> call, Throwable t) {
-
                 t.printStackTrace();
-                Toast.makeText(getContext(), "Error!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Check your connection", Toast.LENGTH_SHORT).show();
             }
         };
     }
-
-    public void onIteamClick(){
-
-    }
-
-
-
 }

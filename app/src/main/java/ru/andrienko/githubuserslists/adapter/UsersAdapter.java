@@ -27,6 +27,8 @@ import ru.andrienko.githubuserslists.entity.User;
  */
 public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.UsersHolder> {
 
+    private static String TAG = UsersAdapter.class.getSimpleName();
+
     private Context mContext;
     private List<User> mUserList;
     private List<OnItemClickListener> mOnItemClickListeners;
@@ -51,10 +53,16 @@ public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.UsersHolder
 
         usersHolder.setLogin(mUserList.get(i).getLogin());
 
-        Log.d("onBindViewHolder", "onBindViewHolder: " +Consts.BASE_URL + mUserList.get(i).getAvatar_url());
+        usersHolder.setClickListener(view ->{
+            for (OnItemClickListener l : mOnItemClickListeners){
+                l.onItemClick(i,mUserList.get(i));
+            }
+        });
+
+        Log.d(TAG, "onBindViewHolder: " + mUserList.get(i).getAvatar_url());
 
         Picasso.get()
-                .load(Consts.BASE_URL + mUserList.get(i).getAvatar_url())
+                .load(mUserList.get(i).getAvatar_url())
                 .error(R.drawable.error)
                 .into(usersHolder.getAvatarImage());
 

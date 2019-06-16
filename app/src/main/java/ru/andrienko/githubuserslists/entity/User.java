@@ -2,8 +2,7 @@ package ru.andrienko.githubuserslists.entity;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
  * Created by Maxim Andrienko
  * 6/16/19
  */
-public class User {
+public class User implements Serializable {
 
 
     private String id;
