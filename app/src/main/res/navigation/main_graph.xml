@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/fragmentUsers">
+    <fragment
+        android:id="@+id/fragmentUsers"
+        android:name="ru.andrienko.githubuserslists.fragments.FragmentUsers"
+        android:label="fr_users"
+        tools:layout="@layout/fr_users" />
+    <fragment
+        android:id="@+id/fragmentReadUsers"
+        android:name="ru.andrienko.githubuserslists.fragments.FragmentReadUsers"
+        android:label="fr_read_user"
+        tools:layout="@layout/fr_read_user" />
+</navigation>
