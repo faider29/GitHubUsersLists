@@ -24,7 +24,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import ru.andrienko.githubuserslists.R;
-import ru.andrienko.githubuserslists.adapter.UsersAdapter;
 import ru.andrienko.githubuserslists.entity.Profile;
 import ru.andrienko.githubuserslists.entity.User;
 import ru.andrienko.githubuserslists.network.NetworkRepository;
@@ -39,8 +38,9 @@ public class FragmentReadUsers extends Fragment {
 
 
     public static final String USER_KEY = "user_key";
+
     private User user;
-    private Profile profile = new Profile();
+    private Profile profile;
 
 
     private ImageView mAvatar;
@@ -48,8 +48,11 @@ public class FragmentReadUsers extends Fragment {
     private TextView mName;
     private TextView mFollowers;
     private TextView mFollowing;
+
     private Callback<JsonObject> mCallback;
+
     private List<Profile> mProfileList = new ArrayList<>();
+
     private NetworkRepository mNetworkRepository = new NetworkRepository();
 
 
@@ -60,6 +63,8 @@ public class FragmentReadUsers extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fr_read_user,container,false);
         user = (User) getArguments().getSerializable(USER_KEY);
+
+
 
 //        Profile profile = new Profile();
 
@@ -119,6 +124,7 @@ public class FragmentReadUsers extends Fragment {
     }
     private void initView(){
 
+//        Profile profile = new Profile();
 
         mAvatar = getActivity().findViewById(R.id.iv_read_user);
         Picasso.get()
@@ -129,9 +135,13 @@ public class FragmentReadUsers extends Fragment {
         mlogin = getActivity().findViewById(R.id.tv_read_login);
         mlogin.setText(user.getLogin());
 
+        /**
+         * getFollowers with null object, why?
+         */
         mFollowers = getActivity().findViewById(R.id.tv_read_followers);
 //        mFollowers.setText("Follower: " + profile.getFollowers());
         mFollowers.setText(profile.getFollowers());
+
 
         mFollowing = getActivity().findViewById(R.id.tv_read_following);
 //        mFollowing.setText("Following: " + profile.getFollowing());

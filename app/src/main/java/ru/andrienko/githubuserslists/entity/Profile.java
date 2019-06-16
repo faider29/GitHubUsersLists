@@ -1,5 +1,7 @@
 package ru.andrienko.githubuserslists.entity;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -13,6 +15,8 @@ import java.util.List;
  * 6/17/19
  */
 public class Profile implements Serializable {
+
+    private static String TAG = Profile.class.getSimpleName();
 
     private String name;
 
@@ -68,10 +72,11 @@ public class Profile implements Serializable {
         List<Profile> profileList = new ArrayList<>();
         Gson gson = new Gson();
         JsonObject object = response.getAsJsonObject();
-//        for (int i = 0; i < object.size(); i++){
-            Profile profile= gson.fromJson(object.toString(),Profile.class);
+
+        Log.d(TAG, "getProfileFromJson: " + response.getAsJsonObject());
+
+        Profile profile = gson.fromJson(object.toString(),Profile.class);
             profileList.add(profile);
-//        }
         return  profileList;
     }
 
