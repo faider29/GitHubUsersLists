@@ -7,6 +7,8 @@
     android:layout_height="match_parent">
 
 
+    <!-- Закинуть все в стринги -->
+
     <ImageView
         android:id="@+id/iv_read_user"
         android:layout_width="wrap_content"
@@ -20,7 +22,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/tv_name_user"
+        android:id="@+id/tv_read_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -30,5 +32,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_read_user" />
+
+    <TextView
+        android:id="@+id/tv_read_followers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="32dp"
+        android:text="Followers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_read_login" />
+
+    <TextView
+        android:id="@+id/tv_read_following"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="60dp"
+        android:text="Following"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintStart_toEndOf="@+id/tv_read_followers"
+        app:layout_constraintTop_toBottomOf="@+id/tv_read_login" />
 
 </android.support.constraint.ConstraintLayout>

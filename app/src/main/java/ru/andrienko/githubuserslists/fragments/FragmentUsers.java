@@ -43,7 +43,6 @@ public class FragmentUsers  extends Fragment {
     private UsersAdapter mAdapter;
     private List<User> mUserList = new ArrayList<>();
     private NavController mNavController;
-    private FragmentUsers mFragmentUsers;
     public static final String USER_KEY = "user_key";
 
 

@@ -21,6 +21,13 @@ public class User implements Serializable {
 
 
 
+    /**
+     * Будет ли работать запрос если таких полей нет????7
+     * @return
+     */
+
+
+
     public String getId() {
         return id;
     }
@@ -59,6 +66,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "id: " + id + "avatar_url: " + avatar_url + "login: " + login;
+        return "id: " + id + "avatar_url: " + avatar_url
+                + "login: " + login;
     }
 }

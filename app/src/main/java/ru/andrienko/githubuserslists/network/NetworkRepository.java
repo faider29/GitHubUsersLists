@@ -1,5 +1,7 @@
 package ru.andrienko.githubuserslists.network;
 
+import android.util.Log;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -8,6 +10,7 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.andrienko.githubuserslists.Consts;
+import ru.andrienko.githubuserslists.entity.User;
 import ru.andrienko.githubuserslists.interfaces.Api;
 
 /**
@@ -15,6 +18,9 @@ import ru.andrienko.githubuserslists.interfaces.Api;
  * 6/16/19
  */
 public class NetworkRepository {
+
+    private User user;
+    private static String TAG = NetworkRepository.class.getSimpleName();
 
 
     public void getUsers(Callback<JsonArray> callback){
@@ -26,6 +32,20 @@ public class NetworkRepository {
 
         final Api api = retrofit.create(Api.class);
         Call<JsonArray> j = api.getUsers();
+        j.enqueue(callback);
+    }
+
+    public void getProfil(Callback<JsonObject> callback, String login){
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(Consts.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create());
+
+        Retrofit retrofit = builder.build();
+
+        final  Api api = retrofit.create(Api.class);
+
+//        Log.d(TAG, "getProfil: " +api.getProfil(user.getLogin()));
+        Call<JsonObject> j = api.getProfil(login);
         j.enqueue(callback);
     }
 }

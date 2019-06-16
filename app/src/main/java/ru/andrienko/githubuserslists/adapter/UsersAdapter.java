@@ -59,7 +59,7 @@ public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.UsersHolder
             }
         });
 
-        Log.d(TAG, "onBindViewHolder: " + mUserList.get(i).getAvatar_url());
+//        Log.d(TAG, "onBindViewHolder: " + mUserList.get(i).getAvatar_url());
 
         Picasso.get()
                 .load(mUserList.get(i).getAvatar_url())
