@@ -6,7 +6,7 @@
     app:startDestination="@id/fragmentUsers">
     <fragment
         android:id="@+id/fragmentUsers"
-        android:name="ru.andrienko.githubuserslists.fragments.FragmentUsers"
+        android:name="ru.andrienko.githubuserslists.mvvm.fragments.FragmentUsers"
         android:label="fr_users"
         tools:layout="@layout/fr_users" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentReadUsers"
-        android:name="ru.andrienko.githubuserslists.fragments.FragmentReadUsers"
+        android:name="ru.andrienko.githubuserslists.mvvm.fragments.FragmentReadUsers"
         android:label="fr_read_user"
         tools:layout="@layout/fr_read_user" />
 </navigation>

@@ -3,12 +3,9 @@ package ru.andrienko.githubuserslists.entity;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Maxim Andrienko
@@ -27,6 +24,10 @@ public class Profile implements Serializable {
     private String following;
 
     private String avatar_url;
+
+    private String bio;
+
+
 
     public String getName() {
         return name;
@@ -68,17 +69,25 @@ public class Profile implements Serializable {
         this.avatar_url = avatar_url;
     }
 
-    public static List<Profile> getProfileFromJson(JsonObject response){
-        List<Profile> profileList = new ArrayList<>();
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public static Profile getProfileFromJson(JsonObject response){
         Gson gson = new Gson();
         JsonObject object = response.getAsJsonObject();
 
         Log.d(TAG, "getProfileFromJson: " + response.getAsJsonObject());
 
         Profile profile = gson.fromJson(object.toString(),Profile.class);
-            profileList.add(profile);
-        return  profileList;
+
+        return  profile;
     }
+
 
     @Override
     public String toString() {
@@ -86,6 +95,8 @@ public class Profile implements Serializable {
                 + "location: " + location
                 + "followers: " + followers
                 + "following: " + following
-                + "avatar_url: " + avatar_url;
+                + "avatar_url: " + avatar_url
+                + "bio: " + bio;
     }
+
 }

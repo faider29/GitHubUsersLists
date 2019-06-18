@@ -1,10 +1,10 @@
-package ru.andrienko.githubuserslists.fragments;
+package ru.andrienko.githubuserslists.mvvm.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +16,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +57,7 @@ public class FragmentUsers  extends Fragment {
         mAdapter = new UsersAdapter(getContext(),mUserList);
 
         mRecyclerView = view.findViewById(R.id.rv_users);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListeners((position, user) -> {

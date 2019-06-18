@@ -1,4 +1,4 @@
-package ru.andrienko.githubuserslists.fragments;
+package ru.andrienko.githubuserslists.mvvm.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,12 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,10 +45,11 @@ public class FragmentReadUsers extends Fragment {
     private TextView mName;
     private TextView mFollowers;
     private TextView mFollowing;
+    private TextView mBio;
+    private TextView mLocation;
 
     private Callback<JsonObject> mCallback;
 
-    private List<Profile> mProfileList = new ArrayList<>();
 
     private NetworkRepository mNetworkRepository = new NetworkRepository();
 
@@ -64,38 +62,13 @@ public class FragmentReadUsers extends Fragment {
         View view = inflater.inflate(R.layout.fr_read_user,container,false);
         user = (User) getArguments().getSerializable(USER_KEY);
 
-
-
-//        Profile profile = new Profile();
-
-
         initCallback();
 
         mNetworkRepository.getProfil(mCallback,user.getLogin());
 
-
-//        mAvatar = view.findViewById(R.id.iv_read_user);
-//        Picasso.get()
-//                .load(user.getAvatar_url())
-//                .error(R.drawable.error)
-//                .into(getAvatar());
-//
-//        mlogin = view.findViewById(R.id.tv_read_login);
-//        mlogin.setText(user.getLogin());
-//
-//        mFollowers = view.findViewById(R.id.tv_read_followers);
-////        mFollowers.setText("Follower: " + profile.getFollowers());
-//        mFollowers.setText(profile.getFollowers());
-//
-//        mFollowing = view.findViewById(R.id.tv_read_following);
-////        mFollowing.setText("Following: " + profile.getFollowing());
-//        mFollowing.setText(profile.getFollowing());
-//
-////        mName = view.findViewById(R.id.tv_read_name);
-
-
         return view;
     }
+
     private ImageView getAvatar() {
         return mAvatar;
     }
@@ -107,8 +80,7 @@ public class FragmentReadUsers extends Fragment {
                 Log.d(TAG, "onResponse: " + call.request().toString() );
                 Log.d(TAG, "onResponse: " + response.body());
 
-//                mProfileList.addAll(Profile.getProfileFromJson(response.body()));
-                Profile.getProfileFromJson(response.body());
+               profile =  Profile.getProfileFromJson(response.body());
                 initView();
             }
 
@@ -117,15 +89,13 @@ public class FragmentReadUsers extends Fragment {
                 t.printStackTrace();
                 Log.d(TAG, "onFailure: " + call.request().toString());
                 Log.d(TAG, "onFailure: " + t.getMessage());
+
                 Toast.makeText(getContext(),  "Check your connection", Toast.LENGTH_SHORT).show();
 
             }
         };
     }
     private void initView(){
-
-//        Profile profile = new Profile();
-
         mAvatar = getActivity().findViewById(R.id.iv_read_user);
         Picasso.get()
                 .load(user.getAvatar_url())
@@ -135,19 +105,21 @@ public class FragmentReadUsers extends Fragment {
         mlogin = getActivity().findViewById(R.id.tv_read_login);
         mlogin.setText(user.getLogin());
 
-        /**
-         * getFollowers with null object, why?
-         */
+
         mFollowers = getActivity().findViewById(R.id.tv_read_followers);
-//        mFollowers.setText("Follower: " + profile.getFollowers());
-        mFollowers.setText(profile.getFollowers());
+        mFollowers.setText("Followers: " + profile.getFollowers());
 
 
         mFollowing = getActivity().findViewById(R.id.tv_read_following);
-//        mFollowing.setText("Following: " + profile.getFollowing());
-        mFollowing.setText(profile.getFollowing());
+        mFollowing.setText("Following: " + profile.getFollowing());
 
-//        mName = view.findViewById(R.id.tv_read_name);
+        mName = getActivity().findViewById(R.id.fr_read_name);
+        mName.setText(profile.getName());
 
+        mBio = getActivity().findViewById(R.id.fr_read_bio);
+        mBio.setText(profile.getBio());
+
+        mLocation = getActivity().findViewById(R.id.fr_read_location);
+        mLocation.setText(profile.getLocation());
     }
 }
