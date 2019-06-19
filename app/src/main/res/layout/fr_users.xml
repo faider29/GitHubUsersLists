@@ -2,12 +2,52 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+   <android.support.constraint.ConstraintLayout
+       android:id="@+id/fr_custom_toolbar"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:background="@color/colorPrimary"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent">
+
+      <TextView
+          android:id="@+id/fr_label"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Список Пользователей"
+          android:textColor="@color/white"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+
+   </android.support.constraint.ConstraintLayout>
+
    <android.support.v7.widget.RecyclerView
        android:id="@+id/rv_users"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"/>
+       android:layout_width="0dp"
+       android:layout_height="0dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/fr_custom_toolbar">
+
+
+   </android.support.v7.widget.RecyclerView>
+
+
+   <!--<android.support.v7.widget.RecyclerView-->
+       <!--android:id="@+id/rv_users"-->
+       <!--android:layout_width="match_parent"-->
+       <!--android:layout_height="match_parent"-->
+       <!--android:layout_marginTop="52dp"-->
+       <!--app:layout_constraintTop_toBottomOf="@+id/fr_read_custom_toolbar"-->
+       <!--tools:layout_editor_absoluteX="0dp" />-->
 
 </android.support.constraint.ConstraintLayout>

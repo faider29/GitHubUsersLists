@@ -29,9 +29,9 @@ import ru.andrienko.githubuserslists.network.NetworkRepository;
  * Created by Maxim Andrienko
  * 6/16/19
  */
-public class FragmentReadUsers extends Fragment {
+public class FragmentReadProfile extends Fragment {
 
-    private static String TAG = FragmentReadUsers.class.getSimpleName();
+    private static String TAG = FragmentReadProfile.class.getSimpleName();
 
 
     public static final String USER_KEY = "user_key";
@@ -48,12 +48,14 @@ public class FragmentReadUsers extends Fragment {
     private TextView mBio;
     private TextView mLocation;
 
+    private View mToolbar;
+    private ImageView mBtnBack;
+    private TextView mLabel;
+
     private Callback<JsonObject> mCallback;
 
 
     private NetworkRepository mNetworkRepository = new NetworkRepository();
-
-
 
 
     @Nullable
@@ -96,6 +98,16 @@ public class FragmentReadUsers extends Fragment {
         };
     }
     private void initView(){
+
+        mToolbar = getActivity().findViewById(R.id.fr_read_custom_toolbar);
+        mBtnBack = getActivity().findViewById(R.id.fr_read_btn_back);
+        mBtnBack.setOnClickListener(v -> {
+            getActivity().onBackPressed();
+        });
+        mLabel = getActivity().findViewById(R.id.fr_read_label);
+
+
+
         mAvatar = getActivity().findViewById(R.id.iv_read_user);
         Picasso.get()
                 .load(user.getAvatar_url())

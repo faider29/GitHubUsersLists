@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentReadUsers"
-        android:name="ru.andrienko.githubuserslists.mvvm.fragments.FragmentReadUsers"
+        android:name="ru.andrienko.githubuserslists.mvvm.fragments.FragmentReadProfile"
         android:label="fr_read_user"
         tools:layout="@layout/fr_read_user" />
 </navigation>

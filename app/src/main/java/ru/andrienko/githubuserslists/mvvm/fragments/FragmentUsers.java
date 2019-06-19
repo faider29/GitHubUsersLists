@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.navigation.NavController;
@@ -45,6 +46,9 @@ public class FragmentUsers  extends Fragment {
     public static final String USER_KEY = "user_key";
 
 
+    private View mToolbar;
+    private TextView mLabel;
+
 
     private NetworkRepository mNetworkRepository = new NetworkRepository();
 
@@ -54,6 +58,9 @@ public class FragmentUsers  extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fr_users,container,false);
 
+        mToolbar = view.findViewById(R.id.fr_custom_toolbar);
+        mLabel = view.findViewById(R.id.fr_label);
+
         mAdapter = new UsersAdapter(getContext(),mUserList);
 
         mRecyclerView = view.findViewById(R.id.rv_users);
@@ -61,10 +68,8 @@ public class FragmentUsers  extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListeners((position, user) -> {
-//            mNavController = Navigation.findNavController(,R.id.nav_host_fragment);
             Bundle bundle = new Bundle();
             bundle.putSerializable(USER_KEY,user);
-//            mFragmentUsers.setArguments(bundle);
 
             mNavController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
             Log.d(TAG, "onCreateView: " + bundle.size());

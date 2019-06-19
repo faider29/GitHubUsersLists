@@ -9,6 +9,43 @@
 
     <!-- Закинуть все в стринги -->
 
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/fr_read_custom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/fr_read_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Профиль"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <ImageView
+            android:id="@+id/fr_read_btn_back"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/fr_read_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fr_read_label"
+            android:src="@drawable/ic_arrow_back_black_24dp" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
     <ImageView
         android:id="@+id/iv_read_user"
         android:layout_width="wrap_content"
@@ -17,8 +54,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fr_read_custom_toolbar"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
