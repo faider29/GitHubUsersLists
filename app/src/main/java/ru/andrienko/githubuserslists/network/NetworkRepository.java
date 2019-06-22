@@ -17,6 +17,14 @@ import ru.andrienko.githubuserslists.interfaces.Api;
  */
 public class NetworkRepository {
 
+    private static NetworkRepository sRepository;
+
+    public static NetworkRepository getInstance(){
+        if (sRepository == null)
+            sRepository = new NetworkRepository();
+        return  sRepository;
+    }
+
 
 
     public void getUsers(Callback<JsonArray> callback){
