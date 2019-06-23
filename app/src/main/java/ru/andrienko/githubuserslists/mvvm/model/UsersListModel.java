@@ -25,13 +25,14 @@ public class UsersListModel {
     private List<UsersModelListener> mListeners = new ArrayList<>();
 
     private Callback<JsonArray> mCallback;
+    private int mOffset = 0;
 
     public UsersListModel(){
         initCallback();
     }
 
     public void start(){
-        NetworkRepository.getInstance().getUsers(mCallback);
+        NetworkRepository.getInstance().getUsers(mCallback, mOffset);
     }
 
     public void addListener(UsersModelListener listener){
@@ -48,6 +49,7 @@ public class UsersListModel {
             @Override
             public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
                 Log.d(TAG, "onResponse: " + call.request().toString() );
+
                 for (UsersModelListener listener: mListeners){
                     listener.usersListLoad(User.getUserFromJson(response.body()));
                 }
@@ -64,5 +66,11 @@ public class UsersListModel {
 //                Toast.makeText(getContext(), "Check your connection", Toast.LENGTH_SHORT).show();
             }
         };
+
+    }
+
+    public void getNext() {
+        mOffset += 46;
+        NetworkRepository.getInstance().getUsers(mCallback, mOffset);
     }
 }

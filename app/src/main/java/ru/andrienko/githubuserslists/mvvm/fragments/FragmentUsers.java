@@ -32,7 +32,6 @@ import ru.andrienko.githubuserslists.R;
 import ru.andrienko.githubuserslists.adapter.UsersAdapter;
 import ru.andrienko.githubuserslists.entity.User;
 import ru.andrienko.githubuserslists.mvvm.viewModel.UsersListViewModel;
-import ru.andrienko.githubuserslists.network.NetworkRepository;
 
 /**
  * Created by Maxim Andrienko
@@ -42,7 +41,6 @@ public class FragmentUsers  extends Fragment {
 
     private static String TAG = FragmentUsers.class.getSimpleName();
 
-    private Callback<JsonArray> mCallback;
 
     private UsersListViewModel mViewModel;
 
@@ -55,15 +53,18 @@ public class FragmentUsers  extends Fragment {
 
     private View mToolbar;
     private TextView mLabel;
+    private GridLayoutManager layoutManager;
 
-
-//    private NetworkRepository mNetworkRepository = new NetworkRepository();
-
+    private boolean isLoading = true;
+    private int visibleIteamCount, firstVisibleItemPosition, totallItemCount, previousTotal = 0;
+    private int PAGE_ITEM = 10;
+    private View mView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fr_users,container,false);
+        mView = view;
 
         mToolbar = view.findViewById(R.id.fr_custom_toolbar);
         mLabel = view.findViewById(R.id.fr_label);
@@ -71,7 +72,8 @@ public class FragmentUsers  extends Fragment {
         mAdapter = new UsersAdapter(getContext(),mUserList);
 
         mRecyclerView = view.findViewById(R.id.rv_users);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+        layoutManager = new GridLayoutManager(getContext(),2);
+        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListeners((position, user) -> {
@@ -83,19 +85,65 @@ public class FragmentUsers  extends Fragment {
             mNavController.navigate(R.id.fragmentReadUsers,bundle);
         });
 
-//        initCallback();
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
 
-//        mNetworkRepository.getUsers(mCallback);
+                visibleIteamCount = layoutManager.getChildCount();
+                totallItemCount = layoutManager.getItemCount();
+                firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+
+//                Log.d(TAG, "onScrolled: dy = " + dy);
+//                Log.d(TAG, "onScrolled: height = " + (mView.getHeight() * 0.6));
+//                if (dy > 0){
+
+                    if (isLoading){
+                        if (visibleIteamCount + firstVisibleItemPosition >= totallItemCount
+                                && firstVisibleItemPosition >= 0
+                                && totallItemCount >= PAGE_ITEM ){
+//                            isLoading = false;
+                            getNext();
+                        }
+                    }
+//                }
+//                if (dy>0){
+//
+//                    if (isLoading){
+//
+//                        if (totallItemCount > previousTotal) {
+//
+//                            isLoading = false;
+//                            previousTotal = totallItemCount;
+//                        }
+//                    }
+//
+//                    if (!isLoading && (totallItemCount -visibleIteamCount) <= firstVisibleItemPosition + PAGE_ITEM){
+//
+//                        getNext();
+//                        isLoading = true;
+//                    }
+//                }
+
+            }
+        });
+
         observe();
+
         return view;
     }
 
+
+    private void getNext() {
+        mViewModel.getNext();
+    }
 
     private void observe(){
         mViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(UsersListViewModel.class);
         LiveData<List<User>> users = mViewModel.getUsers();
         users.observe(getActivity(), userList ->{
-            mUserList.clear();
+//            mUserList.clear();
             mUserList.addAll(userList);
             mAdapter.notifyDataSetChanged();
         });
@@ -106,23 +154,4 @@ public class FragmentUsers  extends Fragment {
         });
     }
 
-
-//    private void initCallback(){
-//
-//        mCallback = new Callback<JsonArray>() {
-//            @Override
-//            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
-//                Log.d(TAG, "onResponse: " + call.request().toString() );
-//                mUserList.addAll(User.getUserFromJson(response.body()));
-//                mAdapter.notifyDataSetChanged();
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JsonArray> call, Throwable t) {
-//                t.printStackTrace();
-//                Toast.makeText(getContext(), "Check your connection", Toast.LENGTH_SHORT).show();
-//            }
-//        };
-//    }
 }

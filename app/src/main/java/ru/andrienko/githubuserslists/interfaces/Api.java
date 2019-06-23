@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Maxim Andrienko
@@ -15,7 +16,7 @@ public interface Api {
 
 
     @GET("users")
-    Call<JsonArray> getUsers ();
+    Call<JsonArray> getUsers (@Query("since") int since);
 
     @GET("users/{login}")
     Call<JsonObject> getProfil(@Path("login") String login);

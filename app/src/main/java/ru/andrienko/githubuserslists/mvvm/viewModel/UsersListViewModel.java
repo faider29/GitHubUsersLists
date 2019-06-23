@@ -31,6 +31,10 @@ public class UsersListViewModel extends ViewModel implements UsersModelListener 
 
     }
 
+    public void getNext(){
+        mModel.getNext();
+    }
+
     @Override
     public void usersListLoad(List<User> users) {
         mIsLoad.postValue(false);

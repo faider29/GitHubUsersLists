@@ -27,7 +27,7 @@ public class NetworkRepository {
 
 
 
-    public void getUsers(Callback<JsonArray> callback){
+    public void getUsers(Callback<JsonArray> callback, int offset){
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(Consts.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create());
@@ -35,7 +35,7 @@ public class NetworkRepository {
         Retrofit retrofit =  builder.build();
 
         final Api api = retrofit.create(Api.class);
-        Call<JsonArray> j = api.getUsers();
+        Call<JsonArray> j = api.getUsers(offset);
         j.enqueue(callback);
     }
 
