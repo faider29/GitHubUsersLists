@@ -51,7 +51,7 @@ public class FragmentUsers  extends Fragment {
 
     private boolean isLoading = true;
     private int visibleIteamCount, firstVisibleItemPosition, totallItemCount, previousTotal = 0;
-    private int PAGE_ITEM = 10;
+    private int PAGE_ITEM = 5;
     private View mView;
 
     @Nullable
@@ -101,7 +101,7 @@ public class FragmentUsers  extends Fragment {
                         }
                     }
 
-                    if (!isLoading && (totallItemCount -visibleIteamCount) <= firstVisibleItemPosition + PAGE_ITEM){
+                    if (!isLoading && (totallItemCount -visibleIteamCount) <= (firstVisibleItemPosition + PAGE_ITEM)){
 
                         getNext();
                         isLoading = true;
