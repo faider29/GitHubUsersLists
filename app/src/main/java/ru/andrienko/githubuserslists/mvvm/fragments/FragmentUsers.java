@@ -76,7 +76,7 @@ public class FragmentUsers  extends Fragment {
 
             mNavController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
             Log.d(TAG, "onCreateView: " + bundle.size());
-            mNavController.navigate(R.id.fragmentReadUsers,bundle);
+            mNavController.navigate(R.id.action_fragmentUsers_to_fragmentReadUsers,bundle);
         });
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

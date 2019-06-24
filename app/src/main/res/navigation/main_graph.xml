@@ -11,7 +11,11 @@
         tools:layout="@layout/fr_users" >
         <action
             android:id="@+id/action_fragmentUsers_to_fragmentReadUsers"
-            app:destination="@id/fragmentReadUsers" />
+            app:destination="@id/fragmentReadUsers"
+            app:enterAnim="@anim/in_from_right"
+            app:exitAnim="@anim/out_to_left"
+            app:popEnterAnim="@anim/in_from_left"
+            app:popExitAnim="@anim/out_to_right" />
     </fragment>
     <fragment
         android:id="@+id/fragmentReadUsers"
