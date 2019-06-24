@@ -11,10 +11,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import ru.andrienko.githubuserslists.Consts;
 import ru.andrienko.githubuserslists.interfaces.Api;
 
-/**
- * Created by Maxim Andrienko
- * 6/16/19
- */
 public class NetworkRepository {
 
     private static NetworkRepository sRepository;
@@ -24,8 +20,6 @@ public class NetworkRepository {
             sRepository = new NetworkRepository();
         return  sRepository;
     }
-
-
 
     public void getUsers(Callback<JsonArray> callback, int offset){
         Retrofit.Builder builder = new Retrofit.Builder()

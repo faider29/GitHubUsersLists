@@ -1,7 +1,6 @@
 package ru.andrienko.githubuserslists.mvvm.model;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 
@@ -15,10 +14,7 @@ import ru.andrienko.githubuserslists.entity.User;
 import ru.andrienko.githubuserslists.interfaces.UsersModelListener;
 import ru.andrienko.githubuserslists.network.NetworkRepository;
 
-/**
- * Created by Maxim Andrienko
- * 6/18/19
- */
+
 public class UsersListModel {
 
     private static String TAG = UsersListModel.class.getSimpleName();
@@ -32,11 +28,9 @@ public class UsersListModel {
     }
 
     public void start(){
-
         for (UsersModelListener listener: mListeners){
             listener.showLoad(true);
         }
-
         NetworkRepository.getInstance().getUsers(mCallback, mOffset);
     }
 
@@ -49,18 +43,14 @@ public class UsersListModel {
     }
 
     private void initCallback(){
-
         mCallback = new Callback<JsonArray>() {
             @Override
             public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
                 Log.d(TAG, "onResponse: " + call.request().toString() );
-
                 for (UsersModelListener listener: mListeners){
                     listener.usersListLoad(User.getUserFromJson(response.body()));
                     listener.showLoad(false);
                 }
-
-
             }
 
             @Override
@@ -70,7 +60,6 @@ public class UsersListModel {
                     listener.error(t.getMessage());
                     listener.showLoad(false);
                 }
-//                Toast.makeText(getContext(), "Check your connection", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -82,7 +71,5 @@ public class UsersListModel {
             listener.showLoad(true);
         }
         NetworkRepository.getInstance().getUsers(mCallback, mOffset);
-
     }
-
 }

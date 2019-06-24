@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">GitHub Users Lists</string>
+    <string name="fr_profile">Профиль</string>
+    <string name="fr_name_user">Name User</string>
+    <string name="fr_login_users">Login Users</string>
+    <string name="fr_followers">Followers</string>
+    <string name="fr_following">Following</string>
+    <string name="fr_location">Location</string>
+    <string name="fr_bio">Bio</string>
+    <string name="fr_list_users">Список Пользователей</string>
 </resources>

@@ -7,13 +7,10 @@
     android:layout_height="match_parent">
 
 
-    <!-- Закинуть все в стринги -->
-
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/fr_read_custom_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/height_50dp"
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,26 +20,23 @@
             android:id="@+id/fr_read_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Профиль"
+            android:text="@string/fr_profile"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-
         <ImageView
             android:id="@+id/fr_read_btn_back"
             android:visibility="visible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/margin_8dp"
             app:layout_constraintBottom_toBottomOf="@+id/fr_read_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/fr_read_label"
             android:src="@drawable/ic_arrow_back_black_24dp" />
-
 
     </android.support.constraint.ConstraintLayout>
 
@@ -50,9 +44,9 @@
         android:id="@+id/iv_read_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginEnd="@dimen/margin_8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,10 +57,10 @@
         android:id="@+id/fr_read_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="177dp"
-        android:text="Name User"
+        android:layout_marginStart="@dimen/margin_177dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_177dp"
+        android:text="@string/fr_name_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_read_user" />
@@ -75,10 +69,10 @@
         android:id="@+id/tv_read_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Login Users"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginEnd="@dimen/margin_8dp"
+        android:text="@string/fr_login_users"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fr_read_name" />
@@ -87,9 +81,9 @@
         android:id="@+id/tv_read_followers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="32dp"
-        android:text="Followers"
+        android:layout_marginStart="@dimen/margin_84dp"
+        android:layout_marginTop="@dimen/margin_32dp"
+        android:text="@string/fr_followers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_read_login" />
 
@@ -97,10 +91,10 @@
         android:id="@+id/tv_read_following"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="60dp"
-        android:text="Following"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginTop="@dimen/margin_32dp"
+        android:layout_marginEnd="@dimen/margin_60dp"
+        android:text="@string/fr_following"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.862"
         app:layout_constraintStart_toEndOf="@+id/tv_read_followers"
@@ -110,19 +104,19 @@
         android:id="@+id/fr_read_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="32dp"
-        android:text="Location"
+        android:layout_marginStart="@dimen/margin_25dp"
+        android:layout_marginTop="@dimen/margin_32dp"
+        android:text="@string/fr_location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_read_followers" />
 
     <TextView
         android:id="@+id/fr_read_bio"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="16dp"
-        android:text="Bio"
+        android:layout_marginStart="@dimen/margin_25dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:text="@string/fr_bio"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fr_read_location" />
 

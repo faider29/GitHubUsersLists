@@ -9,7 +9,6 @@ public class MainActivity extends AppCompatActivity {
 
     private NavController mNavController;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

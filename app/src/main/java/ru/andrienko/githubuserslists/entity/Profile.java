@@ -7,10 +7,7 @@ import com.google.gson.JsonObject;
 
 import java.io.Serializable;
 
-/**
- * Created by Maxim Andrienko
- * 6/17/19
- */
+
 public class Profile implements Serializable {
 
     private static String TAG = Profile.class.getSimpleName();
@@ -26,7 +23,6 @@ public class Profile implements Serializable {
     private String avatar_url;
 
     private String bio;
-
 
 
     public String getName() {
@@ -87,7 +83,6 @@ public class Profile implements Serializable {
 
         return  profile;
     }
-
 
     @Override
     public String toString() {

@@ -3,17 +3,10 @@ package ru.andrienko.githubuserslists.mvvm.viewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import java.util.List;
-
 import ru.andrienko.githubuserslists.entity.Profile;
 import ru.andrienko.githubuserslists.interfaces.ProfileModelListener;
 import ru.andrienko.githubuserslists.mvvm.model.ProfileModel;
-import ru.andrienko.githubuserslists.mvvm.model.UsersListModel;
 
-/**
- * Created by Maxim Andrienko
- * 6/18/19
- */
 public class ProfileViewModel  extends ViewModel implements ProfileModelListener {
 
     private ProfileModel mModel;
@@ -21,7 +14,6 @@ public class ProfileViewModel  extends ViewModel implements ProfileModelListener
     private MutableLiveData<Profile> mProfile = new MutableLiveData<>();
     private MutableLiveData<String> mError = new MutableLiveData<>();
     private MutableLiveData<Boolean> mIsLoad = new MutableLiveData<>();
-
 
     public ProfileViewModel(){
         mModel = new ProfileModel();
@@ -32,7 +24,6 @@ public class ProfileViewModel  extends ViewModel implements ProfileModelListener
     public void start(String login) {
         mModel.start(login);
     }
-
 
     @Override
     public void profileListLoad(Profile profile) {

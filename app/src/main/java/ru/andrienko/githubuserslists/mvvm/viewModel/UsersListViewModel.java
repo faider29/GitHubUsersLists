@@ -9,12 +9,7 @@ import ru.andrienko.githubuserslists.entity.User;
 import ru.andrienko.githubuserslists.interfaces.UsersModelListener;
 import ru.andrienko.githubuserslists.mvvm.model.UsersListModel;
 
-/**
- * Created by Maxim Andrienko
- * 6/18/19
- */
 public class UsersListViewModel extends ViewModel implements UsersModelListener {
-
 
     private UsersListModel mModel;
 
@@ -22,7 +17,6 @@ public class UsersListViewModel extends ViewModel implements UsersModelListener 
     private MutableLiveData<String> mError = new MutableLiveData<>();
     private MutableLiveData<Boolean> mIsLoad = new MutableLiveData<>();
     private MutableLiveData<Boolean> mShowLoad = new MutableLiveData<>();
-
 
     public UsersListViewModel(){
         mModel = new UsersListModel();
@@ -35,8 +29,6 @@ public class UsersListViewModel extends ViewModel implements UsersModelListener 
     public void getNext(){
         mModel.getNext();
     }
-
-
 
     @Override
     public void usersListLoad(List<User> users) {
@@ -65,14 +57,12 @@ public class UsersListViewModel extends ViewModel implements UsersModelListener 
     public MutableLiveData<List<User>> getUsers(){
         return mUsers;
     }
-
     public MutableLiveData<String> getError(){
         return mError;
     }
     public MutableLiveData<Boolean> getIsLoad(){
         return mIsLoad;
     }
-
     public MutableLiveData<Boolean> getShowLoad(){
         return mShowLoad;
     }

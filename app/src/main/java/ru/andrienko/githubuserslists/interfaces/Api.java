@@ -8,12 +8,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-/**
- * Created by Maxim Andrienko
- * 6/16/19
- */
-public interface Api {
 
+public interface Api {
 
     @GET("users")
     Call<JsonArray> getUsers (@Query("since") int since);

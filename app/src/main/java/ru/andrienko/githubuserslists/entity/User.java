@@ -6,10 +6,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Maxim Andrienko
- * 6/16/19
- */
 public class User implements Serializable {
 
 
@@ -18,14 +14,6 @@ public class User implements Serializable {
     private String avatar_url;
 
     private String login;
-
-
-
-    /**
-     * Будет ли работать запрос если таких полей нет????7
-     * @return
-     */
-
 
 
     public String getId() {
@@ -66,7 +54,8 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "id: " + id + "avatar_url: " + avatar_url
+        return "id: " + id
+                + "avatar_url: " + avatar_url
                 + "login: " + login;
     }
 }

@@ -1,7 +1,6 @@
 package ru.andrienko.githubuserslists.mvvm.model;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
@@ -15,10 +14,7 @@ import ru.andrienko.githubuserslists.entity.Profile;
 import ru.andrienko.githubuserslists.interfaces.ProfileModelListener;
 import ru.andrienko.githubuserslists.network.NetworkRepository;
 
-/**
- * Created by Maxim Andrienko
- * 6/18/19
- */
+
 public class ProfileModel {
 
     private static String TAG = ProfileModel.class.getSimpleName();
@@ -53,9 +49,6 @@ public class ProfileModel {
                 for (ProfileModelListener listener: mListeners){
                     listener.profileListLoad(Profile.getProfileFromJson(response.body()));
                 }
-
-//                profile =  Profile.getProfileFromJson(response.body());
-//                initView();
             }
 
             @Override
@@ -66,8 +59,6 @@ public class ProfileModel {
                 for (ProfileModelListener listener: mListeners){
                     listener.error(t.getMessage());
                 }
-
-//                Toast.makeText(getContext(),  "Check your connection", Toast.LENGTH_SHORT).show();
 
             }
         };

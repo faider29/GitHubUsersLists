@@ -11,28 +11,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
-
 import java.util.Objects;
 
 import retrofit2.Callback;
+
 import ru.andrienko.githubuserslists.R;
 import ru.andrienko.githubuserslists.entity.Profile;
 import ru.andrienko.githubuserslists.entity.User;
 import ru.andrienko.githubuserslists.mvvm.viewModel.ProfileViewModel;
 
-/**
- * Created by Maxim Andrienko
- * 6/16/19
- */
+
 public class FragmentReadProfile extends Fragment {
-
-    private static String TAG = FragmentReadProfile.class.getSimpleName();
-
 
     public static final String USER_KEY = "user_key";
 
@@ -57,7 +51,6 @@ public class FragmentReadProfile extends Fragment {
 
     private View mView;
 
-//    private NetworkRepository mNetworkRepository = new NetworkRepository();
 
 
     @Nullable
@@ -66,7 +59,6 @@ public class FragmentReadProfile extends Fragment {
         mView = inflater.inflate(R.layout.fr_read_user,container,false);
         user = (User) getArguments().getSerializable(USER_KEY);
 
-//        initCallback();
 
         initView();
         observe();
@@ -86,54 +78,42 @@ public class FragmentReadProfile extends Fragment {
             updateViews();
         });
         mViewModel.start(user.getLogin());
+
+        LiveData<String> error = mViewModel.getError();
+        error.observe(getActivity(),errorMessage ->{
+            Toast.makeText(getContext(), "Error, check connection", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void initView(){
-
         mToolbar = mView.findViewById(R.id.fr_read_custom_toolbar);
         mBtnBack = mView.findViewById(R.id.fr_read_btn_back);
+
         mBtnBack.setOnClickListener(v -> {
             getActivity().onBackPressed();
         });
+
         mLabel = mView.findViewById(R.id.fr_read_label);
-
-
         mAvatar = mView.findViewById(R.id.iv_read_user);
-
-
         mlogin = mView.findViewById(R.id.tv_read_login);
-
-
         mFollowers = mView.findViewById(R.id.tv_read_followers);
-
-
         mFollowing = mView.findViewById(R.id.tv_read_following);
-
         mName = mView.findViewById(R.id.fr_read_name);
-
         mBio = mView.findViewById(R.id.fr_read_bio);
-
         mLocation = mView.findViewById(R.id.fr_read_location);
     }
 
     private void updateViews(){
-
         Picasso.get()
                 .load(user.getAvatar_url())
                 .error(R.drawable.error)
                 .into(getAvatar());
 
         mlogin.setText(user.getLogin());
-
         mFollowers.setText("Followers: " + profile.getFollowers());
-
         mFollowing.setText("Following: " + profile.getFollowing());
-
         mName.setText(profile.getName());
-
         mBio.setText(profile.getBio());
-
         mLocation.setText(profile.getLocation());
-
     }
 }

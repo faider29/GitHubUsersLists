@@ -4,11 +4,9 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,17 +15,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.andrienko.githubuserslists.Consts;
 import ru.andrienko.githubuserslists.R;
 import ru.andrienko.githubuserslists.entity.User;
 
-/**
- * Created by Maxim Andrienko
- * 6/16/19
- */
+
 public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.UsersHolder> {
 
-    private static String TAG = UsersAdapter.class.getSimpleName();
 
     private Context mContext;
     private List<User> mUserList;
@@ -50,7 +43,6 @@ public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.UsersHolder
 
     @Override
     public void onBindViewHolder(@NonNull UsersHolder usersHolder, int i) {
-
         usersHolder.setLogin(mUserList.get(i).getLogin());
 
         usersHolder.setClickListener(view ->{
@@ -59,13 +51,10 @@ public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.UsersHolder
             }
         });
 
-//        Log.d(TAG, "onBindViewHolder: " + mUserList.get(i).getAvatar_url());
-
         Picasso.get()
                 .load(mUserList.get(i).getAvatar_url())
                 .error(R.drawable.error)
                 .into(usersHolder.getAvatarImage());
-
     }
 
     @Override
@@ -88,8 +77,6 @@ public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.UsersHolder
             mView = itemView;
             mAvatar = itemView.findViewById(R.id.iv_item_users);
             mLogin = itemView.findViewById(R.id.tv_item_users);
-
-
         }
 
         public void setLogin(String login) {
