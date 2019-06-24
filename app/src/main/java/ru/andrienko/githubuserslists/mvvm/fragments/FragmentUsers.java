@@ -1,7 +1,6 @@
 package ru.andrienko.githubuserslists.mvvm.fragments;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,20 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import ru.andrienko.githubuserslists.R;
 import ru.andrienko.githubuserslists.adapter.UsersAdapter;
 import ru.andrienko.githubuserslists.entity.User;
@@ -55,7 +49,7 @@ public class FragmentUsers  extends Fragment {
     private TextView mLabel;
     private GridLayoutManager layoutManager;
 
-    private boolean isLoading = false;
+    private boolean isLoading = true;
     private int visibleIteamCount, firstVisibleItemPosition, totallItemCount, previousTotal = 0;
     private int PAGE_ITEM = 10;
     private View mView;
@@ -95,37 +89,24 @@ public class FragmentUsers  extends Fragment {
                 firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
 
 
-//                Log.d(TAG, "onScrolled: dy = " + dy);
-//                Log.d(TAG, "onScrolled: height = " + (mView.getHeight() * 0.6));
 
-                if (dy > 0){
+                if (dy>0){
 
-                    if (!isLoading){
-                        if (visibleIteamCount + firstVisibleItemPosition >= totallItemCount
-                                && firstVisibleItemPosition >= 0
-                                && totallItemCount >= PAGE_ITEM ){
-                            getNext();
+                    if (isLoading){
+
+                        if (totallItemCount > previousTotal) {
+
+                            isLoading = false;
+                            previousTotal = totallItemCount;
                         }
                     }
-                }
 
-//                if (dy>0){
-//
-//                    if (isLoading){
-//
-//                        if (totallItemCount > previousTotal) {
-//
-//                            isLoading = false;
-//                            previousTotal = totallItemCount;
-//                        }
-//                    }
-//
-//                    if (!isLoading && (totallItemCount -visibleIteamCount) <= firstVisibleItemPosition + PAGE_ITEM){
-//
-//                        getNext();
-//                        isLoading = true;
-//                    }
-//                }
+                    if (!isLoading && (totallItemCount -visibleIteamCount) <= firstVisibleItemPosition + PAGE_ITEM){
+
+                        getNext();
+                        isLoading = true;
+                    }
+                }
 
             }
         });
@@ -137,7 +118,7 @@ public class FragmentUsers  extends Fragment {
 
 
     private void getNext() {
-        isLoading = true;
+//        isLoading = false;
 
         mViewModel.getNext();
     }
