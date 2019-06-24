@@ -32,6 +32,11 @@ public class UsersListModel {
     }
 
     public void start(){
+
+        for (UsersModelListener listener: mListeners){
+            listener.showLoad(true);
+        }
+
         NetworkRepository.getInstance().getUsers(mCallback, mOffset);
     }
 
@@ -52,6 +57,7 @@ public class UsersListModel {
 
                 for (UsersModelListener listener: mListeners){
                     listener.usersListLoad(User.getUserFromJson(response.body()));
+                    listener.showLoad(false);
                 }
 
 
@@ -62,6 +68,7 @@ public class UsersListModel {
                 t.printStackTrace();
                 for (UsersModelListener listener: mListeners){
                     listener.error(t.getMessage());
+                    listener.showLoad(false);
                 }
 //                Toast.makeText(getContext(), "Check your connection", Toast.LENGTH_SHORT).show();
             }
@@ -71,6 +78,11 @@ public class UsersListModel {
 
     public void getNext() {
         mOffset += 46;
+        for (UsersModelListener listener: mListeners){
+            listener.showLoad(true);
+        }
         NetworkRepository.getInstance().getUsers(mCallback, mOffset);
+
     }
+
 }

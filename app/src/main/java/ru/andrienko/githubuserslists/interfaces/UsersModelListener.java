@@ -13,4 +13,6 @@ public interface UsersModelListener {
     void usersListLoad(List<User> entityUsers );
 
     void error(String errorMessage);
+
+    void showLoad(Boolean isLoad);
 }

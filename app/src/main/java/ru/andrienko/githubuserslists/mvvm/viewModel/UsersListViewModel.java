@@ -21,6 +21,7 @@ public class UsersListViewModel extends ViewModel implements UsersModelListener 
     private MutableLiveData<List<User>> mUsers = new MutableLiveData<>();
     private MutableLiveData<String> mError = new MutableLiveData<>();
     private MutableLiveData<Boolean> mIsLoad = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mShowLoad = new MutableLiveData<>();
 
 
     public UsersListViewModel(){
@@ -35,6 +36,8 @@ public class UsersListViewModel extends ViewModel implements UsersModelListener 
         mModel.getNext();
     }
 
+
+
     @Override
     public void usersListLoad(List<User> users) {
         mIsLoad.postValue(false);
@@ -45,6 +48,11 @@ public class UsersListViewModel extends ViewModel implements UsersModelListener 
     public void error(String errorMessage) {
         mIsLoad.postValue(false);
         mError.postValue("Ошибка: " +errorMessage);
+    }
+
+    @Override
+    public void showLoad(Boolean isLoad) {
+        mShowLoad.postValue(isLoad);
     }
 
     @Override
@@ -63,5 +71,9 @@ public class UsersListViewModel extends ViewModel implements UsersModelListener 
     }
     public MutableLiveData<Boolean> getIsLoad(){
         return mIsLoad;
+    }
+
+    public MutableLiveData<Boolean> getShowLoad(){
+        return mShowLoad;
     }
 }

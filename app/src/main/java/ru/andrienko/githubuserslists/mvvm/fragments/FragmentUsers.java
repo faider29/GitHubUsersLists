@@ -102,12 +102,12 @@ public class FragmentUsers  extends Fragment {
                         if (totallItemCount > previousTotal) {
                             isLoading = false;
                             previousTotal = totallItemCount;
-                            mProgressBar.setVisibility(View.INVISIBLE);
+//                            mProgressBar.setVisibility(View.INVISIBLE);
                         }
                     }
 
                     if (!isLoading && (totallItemCount -visibleIteamCount) <= (firstVisibleItemPosition + PAGE_ITEM)){
-                        mProgressBar.setVisibility(ProgressBar.VISIBLE);
+//                        mProgressBar.setVisibility(ProgressBar.VISIBLE);
                         getNext();
                         isLoading = true;
                     }
@@ -122,9 +122,9 @@ public class FragmentUsers  extends Fragment {
 
     private void getNext() {
         mViewModel.getNext();
-//        mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-
     }
+
+
 
     private void observe(){
         mViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(UsersListViewModel.class);
@@ -136,6 +136,15 @@ public class FragmentUsers  extends Fragment {
 
         LiveData<String> error = mViewModel.getError();
         error.observe(getActivity(),errorMessage ->{
+
+        });
+
+        LiveData<Boolean> isLoad = mViewModel.getShowLoad();
+        isLoad.observe(getActivity(),showLoad ->{
+
+            if (showLoad ){
+                mProgressBar.setVisibility(View.VISIBLE);
+            }else mProgressBar.setVisibility(View.INVISIBLE);
 
         });
     }
