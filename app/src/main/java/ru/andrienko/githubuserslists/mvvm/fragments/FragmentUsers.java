@@ -55,7 +55,7 @@ public class FragmentUsers  extends Fragment {
     private TextView mLabel;
     private GridLayoutManager layoutManager;
 
-    private boolean isLoading = true;
+    private boolean isLoading = false;
     private int visibleIteamCount, firstVisibleItemPosition, totallItemCount, previousTotal = 0;
     private int PAGE_ITEM = 10;
     private View mView;
@@ -97,17 +97,18 @@ public class FragmentUsers  extends Fragment {
 
 //                Log.d(TAG, "onScrolled: dy = " + dy);
 //                Log.d(TAG, "onScrolled: height = " + (mView.getHeight() * 0.6));
-//                if (dy > 0){
 
-                    if (isLoading){
+                if (dy > 0){
+
+                    if (!isLoading){
                         if (visibleIteamCount + firstVisibleItemPosition >= totallItemCount
                                 && firstVisibleItemPosition >= 0
                                 && totallItemCount >= PAGE_ITEM ){
-//                            isLoading = false;
                             getNext();
                         }
                     }
-//                }
+                }
+
 //                if (dy>0){
 //
 //                    if (isLoading){
@@ -136,6 +137,8 @@ public class FragmentUsers  extends Fragment {
 
 
     private void getNext() {
+        isLoading = true;
+
         mViewModel.getNext();
     }
 
