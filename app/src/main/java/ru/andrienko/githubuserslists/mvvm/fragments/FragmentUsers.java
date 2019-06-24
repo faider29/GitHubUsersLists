@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.navigation.NavController;
@@ -47,21 +48,23 @@ public class FragmentUsers  extends Fragment {
 
     private View mToolbar;
     private TextView mLabel;
+    private ProgressBar mProgressBar;
     private GridLayoutManager layoutManager;
 
     private boolean isLoading = true;
     private int visibleIteamCount, firstVisibleItemPosition, totallItemCount, previousTotal = 0;
     private int PAGE_ITEM = 5;
-    private View mView;
+//    private View mView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fr_users,container,false);
-        mView = view;
+//        mView = view;
 
         mToolbar = view.findViewById(R.id.fr_custom_toolbar);
         mLabel = view.findViewById(R.id.fr_label);
+        mProgressBar = view.findViewById(R.id.progressBar);
 
         mAdapter = new UsersAdapter(getContext(),mUserList);
 
@@ -88,26 +91,27 @@ public class FragmentUsers  extends Fragment {
                 totallItemCount = layoutManager.getItemCount();
                 firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
 
-
+                /**
+                 * isLoad = true
+                 */
 
                 if (dy>0){
 
                     if (isLoading){
 
                         if (totallItemCount > previousTotal) {
-
                             isLoading = false;
                             previousTotal = totallItemCount;
+                            mProgressBar.setVisibility(View.INVISIBLE);
                         }
                     }
 
                     if (!isLoading && (totallItemCount -visibleIteamCount) <= (firstVisibleItemPosition + PAGE_ITEM)){
-
+                        mProgressBar.setVisibility(ProgressBar.VISIBLE);
                         getNext();
                         isLoading = true;
                     }
                 }
-
             }
         });
 
@@ -116,18 +120,16 @@ public class FragmentUsers  extends Fragment {
         return view;
     }
 
-
     private void getNext() {
-//        isLoading = false;
-
         mViewModel.getNext();
+//        mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+
     }
 
     private void observe(){
         mViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(UsersListViewModel.class);
         LiveData<List<User>> users = mViewModel.getUsers();
         users.observe(getActivity(), userList ->{
-//            mUserList.clear();
             mUserList.addAll(userList);
             mAdapter.notifyDataSetChanged();
         });
